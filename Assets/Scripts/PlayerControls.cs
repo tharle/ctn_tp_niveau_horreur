@@ -146,7 +146,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""c44539b1-c22a-4f60-833c-619050f12744"",
                     ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Looking"",

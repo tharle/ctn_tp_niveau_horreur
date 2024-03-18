@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_PlayerSpeed = 2.0f;
     [SerializeField] private float m_JumpHeight = 1.0f;
     [SerializeField] private float m_GravityValue = -9.81f;
+    [SerializeField] private Transform m_Head;
 
     private CharacterController m_Controller;
     private Vector3 m_PlayerVelocity;
@@ -14,11 +15,13 @@ public class PlayerController : MonoBehaviour
     private InputManager m_InputManager;
     private Transform m_CameraTransform;
 
+
     private void Start()
     {
         m_Controller = GetComponent<CharacterController>();
         m_InputManager = InputManager.Instance;
         m_CameraTransform = Camera.main.transform;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -35,17 +38,21 @@ public class PlayerController : MonoBehaviour
         move.y = 0f;
         m_Controller.Move(move * Time.deltaTime * m_PlayerSpeed);
 
-        if (m_InputManager.IsPressLooking())
+        
+
+        /*if (m_InputManager.IsLooking())
         {
-            transform.forward = m_CameraTransform.forward;
+            m_Head.forward = m_CameraTransform.forward;
+            transform.forward = m_Head.forward;
             Cursor.visible = false;
-        }
-        else
+        }*/
+
+        /*if (m_InputManager.IsLookingReleaseThisFrame())
         {
-           /* Vector3 screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-            Mouse.current.WarpCursorPosition(screenPoint);*/
+            Mouse.current.WarpCursorPosition(new Vector2(Screen.width / 2, Screen.height / 2));
             Cursor.visible = true;
-        }
+            m_CameraTransform.forward = transform.forward;
+        }*/
 
         /*if (move != Vector3.zero)
         {

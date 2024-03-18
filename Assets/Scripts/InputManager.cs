@@ -46,11 +46,21 @@ public class InputManager : MonoBehaviour
 
     public bool IsPlayerJumpedThisFrame()
     {
-        return m_PlayerControls.Player.Jump.triggered;
+        return m_PlayerControls.Player.Jump.WasPressedThisFrame();
     }
 
-    public bool IsPressLooking()
+    public bool IsLooking()
     {
         return m_PlayerControls.Player.Looking.IsPressed();
+    }
+
+    public bool IsLookingReleaseThisFrame()
+    {
+        return m_PlayerControls.Player.Looking.WasReleasedThisFrame();
+    }
+
+    public bool IsLookingPressedThisFrame()
+    {
+        return m_PlayerControls.Player.Looking.WasPressedThisFrame();
     }
 }

@@ -3,7 +3,7 @@ using Cinemachine;
 
 public class CinemachinePOVExtension : CinemachineExtension
 {
-    [SerializeField] private Vector2 m_Speed = new Vector2(10f, 10f); // speed for looking around
+    [SerializeField] private Vector2 m_Speed = new Vector2(10f, 5f); // speed for looking around
     [SerializeField] private float m_ClampAngle = 80f;
 
     private InputManager m_InputManager;
@@ -19,7 +19,7 @@ public class CinemachinePOVExtension : CinemachineExtension
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
     {
         
-        if (vcam.Follow && stage == CinemachineCore.Stage.Aim && m_InputManager.IsPressLooking())
+        if (vcam.Follow && stage == CinemachineCore.Stage.Aim)
         {
             Vector2 deltaInput = m_InputManager.GetMouseDelta();
             m_StartingRotation.x += deltaInput.x * m_Speed.y * Time.deltaTime; // its rotate in AXIS, that why I put the speed Y in X and vice versa
