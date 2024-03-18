@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         move.y = 0f;
         m_Controller.Move(move * Time.deltaTime * m_PlayerSpeed);
 
-        
+        transform.forward = m_CameraTransform.forward;
 
         /*if (m_InputManager.IsLooking())
         {
