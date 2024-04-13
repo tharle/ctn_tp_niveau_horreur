@@ -7,8 +7,8 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody m_Rigidbody;
     private LookAtManager m_LookAtManager;
 
-    private float m_MoveSpeed = 5f;
-    private float m_RunningSpeed = 8f;
+    [SerializeField] private float m_MoveSpeed = 5f;
+    [SerializeField] private float m_RunningSpeed = 8f;
 
     private static PlayerMove m_Instance;
     public static PlayerMove Instance { get => m_Instance; }
@@ -31,7 +31,7 @@ public class PlayerMove : MonoBehaviour
         return Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
     }
 
-    public void Move()
+    public void Execute()
     {
         float axisH = Input.GetAxis(GameParameters.InputName.AXIS_HORIZONTAL);
         float axisV = Input.GetAxis(GameParameters.InputName.AXIS_VERTICAL);
@@ -43,10 +43,10 @@ public class PlayerMove : MonoBehaviour
 
         //Vector3 velocity = m_Rigidbody.velocity;
 
-        Vector3 velocity = m_LookAtManager.transform.forward.normalized;
-        velocity.x *= speed;
-        velocity.y = 0;
-        velocity.z *= speed;
+        Vector3 direction = m_LookAtManager.transform.forward * axisV + m_LookAtManager.transform.right * axisH;
+        direction.y = 0;
+        //transform.forward = direction;
+        Vector3 velocity = direction * speed;
 
         m_Rigidbody.velocity = velocity;
 

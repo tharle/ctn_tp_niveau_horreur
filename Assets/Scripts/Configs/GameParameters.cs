@@ -55,8 +55,11 @@ public class GameParameters
         public const string AXIS_HORIZONTAL = "Horizontal";
         public const string AXIS_VERTICAL = "Vertical";
         public const string AXIS_MOUSE_HORIZONTAL = "Mouse X";
-        public const KeyCode NEXT_TEXT = KeyCode.Space;
-        public const KeyCode PLAYER_JUMP = KeyCode.Space;
+        public const string AXIS_MOUSE_VERTICAL = "Mouse Y";
+        public const int MOVE_FLASHLIGHT = (int) MouseButton.RightMouse;
+        public const KeyCode PLAYER_RUN = KeyCode.Space;
+        public const KeyCode PLAYER_INTERRACT_BUTTON = KeyCode.Space;
+        public const int PLAYER_INTERRACT_MOUSE = (int)MouseButton.LeftMouse;
     }
 
     public class PlatformName
