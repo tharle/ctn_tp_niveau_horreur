@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class GameStateRun : AGameState
 {
-    private PlayerMove m_PlayerMove;
+    private PlayerMoveManager m_PlayerMove;
     private FlashLightManager m_FlashLightManager;
+    private LookAtManager m_LookAtManager;
 
     public GameStateRun(GameStateManager attachedBehavior) : base(attachedBehavior, EGameState.Run)
     {
-        m_PlayerMove = PlayerMove.Instance;
+        m_PlayerMove = PlayerMoveManager.Instance;
         m_FlashLightManager = FlashLightManager.Instance;
+        m_LookAtManager = LookAtManager.Instance;
     }
 
     public override void Enter()
@@ -18,6 +20,7 @@ public class GameStateRun : AGameState
         base.Enter();
         Debug.Log("ENTER GAME");
         Time.timeScale = 1.0f;
+        Cursor.visible = false;
     }
 
     public override void Execute()
@@ -30,7 +33,7 @@ public class GameStateRun : AGameState
 
         m_PlayerMove.Execute();
         m_FlashLightManager.Execute();
-
+        m_LookAtManager.Execute();
     }
 
     public override void Exit()

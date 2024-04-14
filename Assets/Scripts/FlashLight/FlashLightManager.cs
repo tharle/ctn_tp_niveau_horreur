@@ -1,11 +1,20 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class FlashLightManager : MonoBehaviour
 {
     private static FlashLightManager m_Instance;
     public static FlashLightManager Instance { get => m_Instance; }
+
+    [SerializeField] private float m_Sensitivity = 2f;
+    float m_VerticalRotation = 0f;
+    float m_HorizontalRotation = 0f;
+
+    bool m_TurnOnToggled = true;
 
     private void Awake()
     {
@@ -16,18 +25,35 @@ public class FlashLightManager : MonoBehaviour
 
     public void Execute()
     {
-        if (Input.GetMouseButtonDown(GameParameters.InputName.MOVE_FLASHLIGHT))
+        if (Input.GetKeyDown(GameParameters.InputName.PLAYER_FLASHLIGHT_TOOGLE))
         {
-            Vector3 mousePosition = Camera.current.ScreenToWorldPoint(Input.mousePosition);
-            //mousePosition.z = Camera.current.transform.position.z + Camera.main.nearClipPlane;
-            /*            Vector3 newPosition = transform.position;
-                        newPosition.x = mousePosition.x;
-                        newPosition.y = mousePosition.y;*/
-            float moveSpeed = 5f;
-            transform.position = Vector2.MoveTowards(transform.position, mousePosition, moveSpeed * Time.deltaTime);
-
-            transform.position = mousePosition;
-
+            m_TurnOnToggled = !m_TurnOnToggled;
+            GetComponent<Light>().enabled = m_TurnOnToggled;
         }
+
+        if (Input.GetMouseButton(GameParameters.InputName.PLAYER_FLASHLIGHT_MOVE)) 
+        { 
+            float inputX = Input.GetAxis(GameParameters.InputName.AXIS_MOUSE_HORIZONTAL) * m_Sensitivity;
+            float inputY = Input.GetAxis(GameParameters.InputName.AXIS_MOUSE_VERTICAL) * m_Sensitivity;
+
+            Debug.Log("FL : " + inputX + "," + inputY);
+
+            m_VerticalRotation -= inputY;
+            m_VerticalRotation = Mathf.Clamp(m_VerticalRotation, -20f, 20f);
+
+            m_HorizontalRotation += inputX;
+            m_HorizontalRotation = Mathf.Clamp(m_HorizontalRotation, -40f, 40f);
+
+            transform.localEulerAngles = Vector3.right * m_VerticalRotation + m_HorizontalRotation * Vector3.up;
+        }
+
+        if (Input.GetMouseButtonUp(GameParameters.InputName.PLAYER_FLASHLIGHT_MOVE))
+        {
+            m_VerticalRotation = 0;
+            m_HorizontalRotation = 0;
+            transform.localEulerAngles = Vector3.right * m_VerticalRotation + m_HorizontalRotation * Vector3.up;
+        }
+
+        //transform.Rotate(Vector3.up * inputX);
     }
 }

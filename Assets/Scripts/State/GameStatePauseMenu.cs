@@ -12,6 +12,7 @@ public class GameStatePauseMenu : AGameState
     {
         base.Enter();
         Time.timeScale = 0f;
+        Cursor.visible = true;
     }
 
     public override void Execute()

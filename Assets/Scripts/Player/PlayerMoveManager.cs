@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMoveManager : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
     private LookAtManager m_LookAtManager;
@@ -10,8 +11,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float m_MoveSpeed = 5f;
     [SerializeField] private float m_RunningSpeed = 8f;
 
-    private static PlayerMove m_Instance;
-    public static PlayerMove Instance { get => m_Instance; }
+    private static PlayerMoveManager m_Instance;
+    public static PlayerMoveManager Instance { get => m_Instance; }
     private void Awake()
     {
         if(m_Instance != null) Destroy(gameObject);
@@ -47,7 +48,7 @@ public class PlayerMove : MonoBehaviour
         direction.y = 0;
         //transform.forward = direction;
         Vector3 velocity = direction * speed;
-
+        velocity.y = m_Rigidbody.velocity.y;
         m_Rigidbody.velocity = velocity;
 
     }    
