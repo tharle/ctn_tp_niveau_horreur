@@ -18,12 +18,19 @@ public class PlayerFlashLight : MonoBehaviour
     private void Start()
     {
         Recharge();
+
+        SubscribeAll();
     }
 
+    private void SubscribeAll()
+    {
+        InterractManager.Instance.OnRecharcheFlashLight += Recharge;
+    }
 
     public void Recharge()
     {
         m_Duration = m_MaxDuration;
+        BatteryChangedNotify();
     }
 
     public void Execute()
@@ -68,9 +75,9 @@ public class PlayerFlashLight : MonoBehaviour
     private void ConsumeDuration()
     {
         if (m_Duration > 0)
-        {   
+        {
             m_Duration -= Time.deltaTime;
-            PlayerController.Instance.LightDurationNofity(m_Duration / m_MaxDuration);
+            BatteryChangedNotify();
         }
         else
         {
@@ -79,5 +86,10 @@ public class PlayerFlashLight : MonoBehaviour
         }
 
 
+    }
+
+    private void BatteryChangedNotify()
+    {
+        PlayerController.Instance.LightDurationNofity(m_Duration / m_MaxDuration);
     }
 }

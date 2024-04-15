@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public event Action<float> OnChangeHP;
     public event Action<float> OnChangeSP;
     public event Action<float> OnChangeLightDuration;
+
+    private Dictionary<EKeyType, bool> m_Invetory;
 
     private static PlayerController m_Instance;
     public static PlayerController Instance { get => m_Instance; }
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        m_Invetory = new Dictionary<EKeyType, bool>();
         m_Movement = GetComponent<PlayerMovement>();
         m_FlashLight = GetComponentInChildren<PlayerFlashLight>();
         m_Camera = PlayerCamera.Instance;
@@ -56,5 +60,16 @@ public class PlayerController : MonoBehaviour
     public void LightDurationNofity(float lightDurationRatio)
     {
         OnChangeLightDuration?.Invoke(lightDurationRatio);
+    }
+
+    public void AddKeyToInvetory(EKeyType key)
+    {
+        if (!HasKeyInInvetory(key)) m_Invetory.Add(key, true);
+        else m_Invetory[key] = true;
+    }
+
+    public bool HasKeyInInvetory(EKeyType keyId)
+    {
+        return m_Invetory.ContainsKey(keyId);
     }
 }

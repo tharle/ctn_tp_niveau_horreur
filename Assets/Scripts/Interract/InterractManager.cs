@@ -6,14 +6,15 @@ using UnityEngine;
 public class InterractManager : MonoBehaviour
 {
 
-    private InterractObject m_InterractionObject;
+    private InterractItemController m_InterractItemController;
 
     private bool m_IsCollidigWithPlayer = false;
     public bool IsCollidigWithPlayer { get => m_IsCollidigWithPlayer; }
 
 
-    public event Action<string> OnInterractObjectShow;
+    public event Action<string> OnInterractItemShow;
     public event Action OnInterractObjectClose;
+    public event Action OnRecharcheFlashLight;
 
 
     private static InterractManager m_Instance;
@@ -48,9 +49,30 @@ public class InterractManager : MonoBehaviour
 
     private void OnInterract(bool entering)
     {
+        if (m_InterractItemController == null) return;
+
         if (entering)
         {
-            OnInterractObjectShow?.Invoke(m_InterractionObject.Description);
+            if (m_InterractItemController.TypeId == EInterractItemType.Door)
+            {
+                if (PlayerController.Instance.HasKeyInInvetory(m_InterractItemController.KeyId))
+                {
+                    m_InterractItemController.IsInterracted = true;
+                }
+            }
+
+            OnInterractItemShow?.Invoke(m_InterractItemController.Description);
+
+            if (m_InterractItemController.TypeId == EInterractItemType.Key && !m_InterractItemController.IsInterracted)
+            {
+                PlayerController.Instance.AddKeyToInvetory(m_InterractItemController.KeyId);
+                m_InterractItemController.IsInterracted = true;
+            }
+            else if (m_InterractItemController.TypeId == EInterractItemType.RecharcheFlashLight)
+            {
+                OnRecharcheFlashLight?.Invoke();
+            }
+                
         }
         else
         {
@@ -58,15 +80,16 @@ public class InterractManager : MonoBehaviour
         }
     }
 
-    public void InterractWithPlayerEnter(InterractObject interractionObject)
+    public void InterractWithPlayerEnter(InterractItemController controller)
     {
-        m_InterractionObject = interractionObject;
+        m_InterractItemController = controller;
         m_IsCollidigWithPlayer = true;
     }
 
     public void InterractWithPlayerExit()
     {
         m_IsCollidigWithPlayer = false;
+        m_InterractItemController = null;
     }
 
     public void Execute()

@@ -27,7 +27,7 @@ public class HUDManager : MonoBehaviour
 
     private void SubscribeAllEvent()
     {
-        m_InterractManager.OnInterractObjectShow += OnInterractObjectShow;
+        m_InterractManager.OnInterractItemShow += OnInterractObjectShow;
         m_InterractManager.OnInterractObjectClose += OnInterractObjectClose;
 
         m_PlayerController.OnChangeHP += OnChangeHP;
