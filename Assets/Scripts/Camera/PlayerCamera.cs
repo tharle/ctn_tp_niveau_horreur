@@ -4,10 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LookAtManager : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
-    private static LookAtManager m_Instance;
-    public static LookAtManager Instance { get => m_Instance; }
+    private static PlayerCamera m_Instance;
+    public static PlayerCamera Instance { get => m_Instance; }
 
     [SerializeField] private float m_Sensitivity = 2f;
     float m_VerticalRotation = 0f;
@@ -36,7 +36,7 @@ public class LookAtManager : MonoBehaviour
         //m_HorizontalRotation = Mathf.Clamp(m_HorizontalRotation, -40f, 40f);
 
         transform.localEulerAngles = Vector3.right * m_VerticalRotation + m_HorizontalRotation * Vector3.up;
-        PlayerMoveManager.Instance.transform.forward = transform.forward;
+        PlayerController.Instance.transform.forward = transform.forward;
         //transform.Rotate(Vector3.up * inputX);
     }
 }

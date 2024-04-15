@@ -3,28 +3,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMoveManager : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
-    private LookAtManager m_LookAtManager;
+    private PlayerCamera m_LookAtManager;
 
     [SerializeField] private float m_MoveSpeed = 5f;
     [SerializeField] private float m_RunningSpeed = 8f;
 
-    private static PlayerMoveManager m_Instance;
-    public static PlayerMoveManager Instance { get => m_Instance; }
-    private void Awake()
-    {
-        if(m_Instance != null) Destroy(gameObject);
-
-        m_Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        m_LookAtManager = LookAtManager.Instance;
+        m_LookAtManager = PlayerCamera.Instance;
     }
 
     private bool IsRuning()

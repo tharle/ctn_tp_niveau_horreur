@@ -881,7 +881,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 10
     NearClipPlane: 0.1
-    FarClipPlane: 5000
+    FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -928,7 +928,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1058102954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c38352bc07507e48a1a5212e5e090c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 997accc38df44754f96e6abd5f84e647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Sensitivity: 2
@@ -1763,8 +1763,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1785318794}
-  - component: {fileID: 1785318797}
   - component: {fileID: 1785318798}
+  - component: {fileID: 1785318799}
+  - component: {fileID: 1785318797}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1831,6 +1832,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1785318799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785318792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 679b286180471a34cb2ef3af8e7a2410, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1943287875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1892,7 +1905,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 5000
+  far clip plane: 1000
   field of view: 40
   orthographic: 0
   orthographic size: 10

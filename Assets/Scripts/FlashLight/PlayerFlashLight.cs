@@ -5,23 +5,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
-public class FlashLightManager : MonoBehaviour
+public class PlayerFlashLight : MonoBehaviour
 {
-    private static FlashLightManager m_Instance;
-    public static FlashLightManager Instance { get => m_Instance; }
-
     [SerializeField] private float m_Sensitivity = 2f;
     float m_VerticalRotation = 0f;
     float m_HorizontalRotation = 0f;
 
     bool m_TurnOnToggled = true;
-
-    private void Awake()
-    {
-        if (m_Instance != null) Destroy(gameObject);
-
-        m_Instance = this;
-    }
 
     public void Execute()
     {

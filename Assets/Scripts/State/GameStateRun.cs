@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class GameStateRun : AGameState
 {
-    private PlayerMoveManager m_PlayerMove;
-    private FlashLightManager m_FlashLightManager;
-    private LookAtManager m_LookAtManager;
+    private PlayerController m_Controller;
 
     public GameStateRun(GameStateManager attachedBehavior) : base(attachedBehavior, EGameState.Run)
     {
-        m_PlayerMove = PlayerMoveManager.Instance;
-        m_FlashLightManager = FlashLightManager.Instance;
-        m_LookAtManager = LookAtManager.Instance;
+        m_Controller = PlayerController.Instance;
     }
 
     public override void Enter()
@@ -31,9 +27,7 @@ public class GameStateRun : AGameState
             m_AttachedBehavior.ChangeState(EGameState.PauseMenu);
         }
 
-        m_PlayerMove.Execute();
-        m_FlashLightManager.Execute();
-        m_LookAtManager.Execute();
+        m_Controller.Execute();
     }
 
     public override void Exit()
