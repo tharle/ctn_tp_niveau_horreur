@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     
     public void SPNofity(float SPRatio)
     {
-        OnChangeHP?.Invoke(SPRatio);
+        OnChangeSP?.Invoke(SPRatio);
     }
 
     public void LightDurationNofity(float lightDurationRatio)

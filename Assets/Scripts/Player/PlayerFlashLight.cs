@@ -7,10 +7,9 @@ using UnityEngine.UIElements;
 
 public class PlayerFlashLight : MonoBehaviour
 {
-    [SerializeField] private float m_MaxDuration = 10f;
-    [SerializeField] private float m_TimeInSecToConsume = 1f;
-    private float m_Duration;
     [SerializeField] private float m_Sensitivity = 2f;
+    [SerializeField] private float m_MaxDuration = 10f;
+    private float m_Duration;
     float m_VerticalRotation = 0f;
     float m_HorizontalRotation = 0f;
 

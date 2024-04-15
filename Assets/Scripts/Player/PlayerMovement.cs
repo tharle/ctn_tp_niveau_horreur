@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,16 +11,20 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float m_MoveSpeed = 5f;
     [SerializeField] private float m_RunningSpeed = 8f;
+    private bool m_InCooldown = false;
+    [SerializeField] private float m_StaminaMax = 1.5f;
+    private float m_Stamina;
 
     private void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_LookAtManager = PlayerCamera.Instance;
+        m_Stamina = m_StaminaMax;
     }
 
     private bool IsRuning()
     {
-        return Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift);
+        return !m_InCooldown && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
     }
 
     public void Execute()
@@ -27,7 +32,15 @@ public class PlayerMovement : MonoBehaviour
         float axisH = Input.GetAxis(GameParameters.InputName.AXIS_HORIZONTAL);
         float axisV = Input.GetAxis(GameParameters.InputName.AXIS_VERTICAL);
 
-        float speed = IsRuning() ? m_RunningSpeed : m_MoveSpeed;
+        float speed = m_MoveSpeed;
+        if (IsRuning())
+        {
+            speed = m_RunningSpeed;
+            ConsumeStamina();
+        } else
+        {
+            RegenStamina();
+        }
 
 
         if (axisH == 0 && axisV == 0) return;
@@ -41,5 +54,40 @@ public class PlayerMovement : MonoBehaviour
         velocity.y = m_Rigidbody.velocity.y;
         m_Rigidbody.velocity = velocity;
 
-    }    
+    }
+
+    private void RegenStamina()
+    {
+        if (m_Stamina >= m_StaminaMax) return;
+
+        m_Stamina += Time.deltaTime/1.5f;
+        
+        if (m_Stamina >= m_StaminaMax)
+        {
+            m_InCooldown = false;
+            m_Stamina = m_StaminaMax;
+        }
+
+        NotifyStaminaChanged();
+    }
+
+    private void ConsumeStamina()
+    {
+        if (m_Stamina <= 0) return;
+
+        m_Stamina -= Time.deltaTime;
+
+        if(m_Stamina <= 0)
+        {
+            m_InCooldown = true;
+            m_Stamina = 0;
+        }
+
+        NotifyStaminaChanged();
+    }
+
+    private void NotifyStaminaChanged()
+    {
+        PlayerController.Instance.SPNofity(m_Stamina / m_StaminaMax);
+    }
 }
