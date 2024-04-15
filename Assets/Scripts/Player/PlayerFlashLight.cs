@@ -26,8 +26,6 @@ public class PlayerFlashLight : MonoBehaviour
             float inputX = Input.GetAxis(GameParameters.InputName.AXIS_MOUSE_HORIZONTAL) * m_Sensitivity;
             float inputY = Input.GetAxis(GameParameters.InputName.AXIS_MOUSE_VERTICAL) * m_Sensitivity;
 
-            Debug.Log("FL : " + inputX + "," + inputY);
-
             m_VerticalRotation -= inputY;
             m_VerticalRotation = Mathf.Clamp(m_VerticalRotation, -20f, 20f);
 
@@ -43,7 +41,5 @@ public class PlayerFlashLight : MonoBehaviour
             m_HorizontalRotation = 0;
             transform.localEulerAngles = Vector3.right * m_VerticalRotation + m_HorizontalRotation * Vector3.up;
         }
-
-        //transform.Rotate(Vector3.up * inputX);
     }
 }

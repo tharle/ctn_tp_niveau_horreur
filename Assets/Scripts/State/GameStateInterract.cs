@@ -16,6 +16,8 @@ public class GameStateInterract : AGameState
         base.Enter();
         Time.timeScale = 0f;
         Cursor.visible = true;
+
+        PlayerController.Instance.OnCloseTextInfo += OnCloseTextInfo;
     }
 
     public override void Execute()
@@ -37,5 +39,11 @@ public class GameStateInterract : AGameState
     {
         base.Exit();
         Debug.Log("EXIT INTERRACTING");
+        PlayerController.Instance.OnCloseTextInfo -= OnCloseTextInfo;
+    }
+
+    private void OnCloseTextInfo()
+    {
+        m_AttachedBehavior.ChangeState(EGameState.Run);
     }
 }

@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     private PlayerFlashLight m_FlashLight;
     private PlayerCamera m_Camera;
 
+    public event Action OnCloseTextInfo;
+
     private static PlayerController m_Instance;
     public static PlayerController Instance { get => m_Instance; }
 
@@ -32,5 +34,12 @@ public class PlayerController : MonoBehaviour
         m_Movement.Execute();
         m_FlashLight.Execute();
         m_Camera.Execute();
+    }
+
+
+
+    public void CloseTextInfo()
+    {
+        OnCloseTextInfo?.Invoke();
     }
 }

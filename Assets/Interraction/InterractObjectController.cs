@@ -25,13 +25,11 @@ public class InterractObjectController : MonoBehaviour
     
     private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log($"ON COLLIDE ENTER {collider.tag}");
         if (collider.CompareTag(GameParameters.TagName.PLAYER)) m_Manager.InterractWithPlayerEnter(m_ObjectInterraction);
     }
 
     private void OnTriggerExit(Collider collider)
     {
-        Debug.Log($"ON COLLIDE EXIT {collider.tag}");
         if (collider.CompareTag(GameParameters.TagName.PLAYER)) m_Manager.InterractWithPlayerExit();
 
     }

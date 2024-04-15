@@ -8,11 +8,15 @@ public class InterractManager : MonoBehaviour
 
     private InterractObject m_InterractionObject;
 
-    private static InterractManager m_Instance;
-
     private bool m_IsCollidigWithPlayer = false;
     public bool IsCollidigWithPlayer { get => m_IsCollidigWithPlayer; }
 
+
+    public event Action<string> OnInterractObjectShow;
+    public event Action OnInterractObjectClose;
+
+
+    private static InterractManager m_Instance;
     public static InterractManager Instance {
 
         get { 
@@ -32,6 +36,11 @@ public class InterractManager : MonoBehaviour
         m_Instance = this;
     }
 
+    private void Start()
+    {
+        SubscribeAllEvents();
+    }
+
     private void SubscribeAllEvents()
     {
         GameStateEvent.Instance.SubscribeTo(EGameState.Interract, OnInterract);
@@ -41,7 +50,11 @@ public class InterractManager : MonoBehaviour
     {
         if (entering)
         {
-            Debug.Log(m_InterractionObject.Description);
+            OnInterractObjectShow?.Invoke(m_InterractionObject.Description);
+        }
+        else
+        {
+            OnInterractObjectClose?.Invoke();
         }
     }
 
