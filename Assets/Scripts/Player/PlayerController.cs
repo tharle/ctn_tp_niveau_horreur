@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     private PlayerCamera m_Camera;
 
     public event Action OnCloseTextInfo;
+    public event Action<float> OnChangeHP;
+    public event Action<float> OnChangeSP;
+    public event Action<float> OnChangeLightDuration;
 
     private static PlayerController m_Instance;
     public static PlayerController Instance { get => m_Instance; }
@@ -39,5 +42,19 @@ public class PlayerController : MonoBehaviour
     public void CloseTextInfo()
     {
         OnCloseTextInfo?.Invoke();
+    }
+    public void HPNofity(float HPRatio)
+    {
+        OnChangeHP?.Invoke(HPRatio);
+    }
+    
+    public void SPNofity(float SPRatio)
+    {
+        OnChangeHP?.Invoke(SPRatio);
+    }
+
+    public void LightDurationNofity(float lightDurationRatio)
+    {
+        OnChangeLightDuration?.Invoke(lightDurationRatio);
     }
 }

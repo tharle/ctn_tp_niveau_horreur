@@ -3,17 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI m_TextInfoValue;
     [SerializeField] GameObject m_TextInfo;
 
+    [SerializeField] Slider m_HPBar;
+    [SerializeField] Slider m_SPBar;
+    [SerializeField] Slider m_LightBar;
+
     InterractManager m_InterractManager;
+
+    PlayerController m_PlayerController;
 
     private void Start()
     {
         m_InterractManager = InterractManager.Instance;
+        m_PlayerController = PlayerController.Instance;
         SubscribeAllEvent();
     }
 
@@ -21,6 +29,10 @@ public class HUDManager : MonoBehaviour
     {
         m_InterractManager.OnInterractObjectShow += OnInterractObjectShow;
         m_InterractManager.OnInterractObjectClose += OnInterractObjectClose;
+
+        m_PlayerController.OnChangeHP += OnChangeHP;
+        m_PlayerController.OnChangeSP += OnChangeSP;
+        m_PlayerController.OnChangeLightDuration += OnChangeLightDuration;
     }
 
     private void OnInterractObjectShow(string texte)
@@ -33,6 +45,22 @@ public class HUDManager : MonoBehaviour
     {
         m_TextInfo.SetActive(false);
     }
+
+    private void OnChangeHP(float ratio)
+    {
+        m_HPBar.value = ratio;
+    }
+
+    private void OnChangeSP(float ratio)
+    {
+        m_SPBar.value = ratio;
+    }
+
+    private void OnChangeLightDuration(float ratio)
+    {
+        m_LightBar.value = ratio;
+    }
+
 
     public void OnClickBtnInterractObjectClose()
     {

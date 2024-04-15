@@ -31,8 +31,7 @@ public class PlayerFlashLight : MonoBehaviour
     {
         if (Input.GetKeyDown(GameParameters.InputName.PLAYER_FLASHLIGHT_TOOGLE))
         {
-            m_TurnOnToggled = !m_TurnOnToggled;
-            GetComponent<Light>().enabled = m_TurnOnToggled;
+            ToogleLight();
         }
 
         if (Input.GetMouseButton(GameParameters.InputName.PLAYER_FLASHLIGHT_MOVE)) 
@@ -59,12 +58,27 @@ public class PlayerFlashLight : MonoBehaviour
         if (m_TurnOnToggled) ConsumeDuration();
     }
 
+    private void ToogleLight()
+    {
+        if (m_Duration <= 0) return;
+
+        m_TurnOnToggled = !m_TurnOnToggled;
+        GetComponent<Light>().enabled = m_TurnOnToggled;
+    }
+
     private void ConsumeDuration()
     {
         if (m_Duration > 0)
-        {
-            
+        {   
             m_Duration -= Time.deltaTime;
+            PlayerController.Instance.LightDurationNofity(m_Duration / m_MaxDuration);
         }
+        else
+        {
+            m_TurnOnToggled = false;
+            GetComponent<Light>().enabled = false;
+        }
+
+
     }
 }
