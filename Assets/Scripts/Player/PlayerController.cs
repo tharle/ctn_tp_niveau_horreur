@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private static PlayerController m_Instance;
     public static PlayerController Instance { get => m_Instance; }
+
     private void Awake()
     {
         if (m_Instance != null) Destroy(gameObject);

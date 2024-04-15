@@ -25,6 +25,14 @@ public class GameStateRun : AGameState
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             m_AttachedBehavior.ChangeState(EGameState.PauseMenu);
+
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && InterractManager.Instance.IsCollidigWithPlayer)
+        {
+            m_AttachedBehavior.ChangeState(EGameState.Interract);
+            return;
         }
 
         m_Controller.Execute();

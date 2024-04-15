@@ -6,7 +6,8 @@ using UnityEngine;
 public enum EGameState
 {
     PauseMenu,
-    Run
+    Run,
+    Interract
 }
 public abstract class AGameState
 {

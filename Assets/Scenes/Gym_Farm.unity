@@ -191,6 +191,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 581605c829e803f41afa05be33a8c4cc, type: 3}
+--- !u!1 &330718587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2917958771630509919, guid: 394fa4b4cf9d8b2438fad1a6f7d7f213,
+    type: 3}
+  m_PrefabInstance: {fileID: 1451459120}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &330718591
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330718587}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.648067, y: 2.143879, z: 5.611395}
+  m_Center: {x: -0.00000047683716, y: 1.0320575, z: 0.027039528}
 --- !u!1 &489910309
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +263,7 @@ GameObject:
   - component: {fileID: 541898276}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -932,6 +959,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Sensitivity: 2
+--- !u!1 &1104086497 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 394fa4b4cf9d8b2438fad1a6f7d7f213,
+    type: 3}
+  m_PrefabInstance: {fileID: 1451459120}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1104086499
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104086497}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.640586, y: 2.151577, z: 9.732985}
+  m_Center: {x: 0.13904238, y: 1.0619369, z: 0.11151171}
+--- !u!114 &1104086500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104086497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ba705f9009e1d438bd1d95f8585fed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObjectInterraction:
+    Name: CARRO
+    Description: "ISTO \xC9 UM CARRO, BUH!"
 --- !u!1 &1122835403
 GameObject:
   m_ObjectHideFlags: 3
@@ -1424,7 +1493,19 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 394fa4b4cf9d8b2438fad1a6f7d7f213,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1104086499}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 394fa4b4cf9d8b2438fad1a6f7d7f213,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1104086500}
+    - targetCorrespondingSourceObject: {fileID: 2917958771630509919, guid: 394fa4b4cf9d8b2438fad1a6f7d7f213,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 330718591}
   m_SourcePrefab: {fileID: 100100000, guid: 394fa4b4cf9d8b2438fad1a6f7d7f213, type: 3}
 --- !u!1 &1553893971
 GameObject:
@@ -1768,7 +1849,7 @@ GameObject:
   - component: {fileID: 1785318797}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
