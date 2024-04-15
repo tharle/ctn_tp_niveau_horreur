@@ -36,8 +36,6 @@ public class PlayerController : MonoBehaviour
         m_Camera.Execute();
     }
 
-
-
     public void CloseTextInfo()
     {
         OnCloseTextInfo?.Invoke();

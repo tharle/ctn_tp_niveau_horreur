@@ -1,17 +1,31 @@
 using Cinemachine;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class PlayerFlashLight : MonoBehaviour
 {
+    [SerializeField] private float m_MaxDuration = 10f;
+    [SerializeField] private float m_TimeInSecToConsume = 1f;
+    private float m_Duration;
     [SerializeField] private float m_Sensitivity = 2f;
     float m_VerticalRotation = 0f;
     float m_HorizontalRotation = 0f;
 
     bool m_TurnOnToggled = true;
+
+    private void Start()
+    {
+        Recharge();
+    }
+
+
+    public void Recharge()
+    {
+        m_Duration = m_MaxDuration;
+    }
 
     public void Execute()
     {
@@ -40,6 +54,17 @@ public class PlayerFlashLight : MonoBehaviour
             m_VerticalRotation = 0;
             m_HorizontalRotation = 0;
             transform.localEulerAngles = Vector3.right * m_VerticalRotation + m_HorizontalRotation * Vector3.up;
+        }
+
+        if (m_TurnOnToggled) ConsumeDuration();
+    }
+
+    private void ConsumeDuration()
+    {
+        if (m_Duration > 0)
+        {
+            
+            m_Duration -= Time.deltaTime;
         }
     }
 }
