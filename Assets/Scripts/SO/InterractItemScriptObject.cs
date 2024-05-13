@@ -15,9 +15,9 @@ public enum EInterractItemType
 public enum EKeyType
 {
     None,
-    A,
+    Fuel,
     B,
-    C
+    Gerator
 }
 
 [Serializable]

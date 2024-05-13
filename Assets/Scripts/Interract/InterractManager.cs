@@ -15,6 +15,7 @@ public class InterractManager : MonoBehaviour
     public event Action<string> OnInterractItemShow;
     public event Action OnInterractObjectClose;
     public event Action OnRecharcheFlashLight;
+    public event Action<bool> OnInterractItemToolTip;
 
 
     private static InterractManager m_Instance;
@@ -30,6 +31,8 @@ public class InterractManager : MonoBehaviour
             return m_Instance;
         }
     }
+
+
     private void Awake()
     {
         if (m_Instance != null && m_Instance != this) Destroy(gameObject);
@@ -59,6 +62,8 @@ public class InterractManager : MonoBehaviour
                 {
                     m_InterractItemController.IsInterracted = true;
                 }
+
+                if(m_InterractItemController.KeyId == EKeyType.Fuel) PlayerController.Instance.AddKeyToInvetory(EKeyType.Gerator);
             }
 
             OnInterractItemShow?.Invoke(m_InterractItemController.Description);
@@ -84,12 +89,14 @@ public class InterractManager : MonoBehaviour
     {
         m_InterractItemController = controller;
         m_IsCollidigWithPlayer = true;
+        OnInterractItemToolTip?.Invoke(m_IsCollidigWithPlayer);
     }
 
     public void InterractWithPlayerExit()
     {
         m_IsCollidigWithPlayer = false;
         m_InterractItemController = null;
+        OnInterractItemToolTip?.Invoke(m_IsCollidigWithPlayer);
     }
 
     public void Execute()

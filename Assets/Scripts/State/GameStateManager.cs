@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.VersionControl.Asset;
 
 
 public class GameStateManager : MonoBehaviour
@@ -32,6 +30,7 @@ public class GameStateManager : MonoBehaviour
     {
         m_CurrentState.Exit();
         m_CurrentState = m_States[stateId];
+        m_CurrentStateId = stateId;
         m_CurrentState.Enter();
     }
 

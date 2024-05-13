@@ -9,6 +9,7 @@ public class HUDManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI m_TextInfoValue;
     [SerializeField] GameObject m_TextInfo;
+    [SerializeField] GameObject m_ToInterractToolTip;
 
     [SerializeField] Slider m_HPBar;
     [SerializeField] Slider m_SPBar;
@@ -29,6 +30,7 @@ public class HUDManager : MonoBehaviour
     {
         m_InterractManager.OnInterractItemShow += OnInterractObjectShow;
         m_InterractManager.OnInterractObjectClose += OnInterractObjectClose;
+        m_InterractManager.OnInterractItemToolTip += OnToggleInterractToolTip;
 
         m_PlayerController.OnChangeHP += OnChangeHP;
         m_PlayerController.OnChangeSP += OnChangeSP;
@@ -44,6 +46,11 @@ public class HUDManager : MonoBehaviour
     private void OnInterractObjectClose()
     {
         m_TextInfo.SetActive(false);
+    }
+
+    private void OnToggleInterractToolTip(bool show)
+    {
+        m_ToInterractToolTip.SetActive(show);
     }
 
     private void OnChangeHP(float ratio)
