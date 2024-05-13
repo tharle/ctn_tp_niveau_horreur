@@ -26,7 +26,6 @@ public class InterractManager : MonoBehaviour
             {
                 GameObject go = new GameObject("InterractManager");
                 m_Instance =  go.AddComponent<InterractManager>();
-                DontDestroyOnLoad(go);
             }
             return m_Instance;
         }
@@ -81,7 +80,7 @@ public class InterractManager : MonoBehaviour
         }
         else
         {
-            if (m_InterractItemController.KeyId == EKeyType.Gerator) PlayerController.Instance.AddKeyToInvetory(EKeyType.Win);
+            if (m_InterractItemController.KeyId == EKeyType.Gerator && PlayerController.Instance.HasKeyInInvetory(EKeyType.Gerator)) PlayerController.Instance.AddKeyToInvetory(EKeyType.Win);
             OnInterractObjectClose?.Invoke();
         }
     }

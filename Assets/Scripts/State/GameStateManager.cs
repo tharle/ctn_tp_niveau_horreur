@@ -9,7 +9,12 @@ public class GameStateManager : MonoBehaviour
 
     [SerializeField] EGameState m_CurrentStateId;
 
-    
+
+    private void OnDisable()
+    {
+        GameStateEvent.Instance.ClearAll();
+    }
+
     void Start()
     {
         m_States = new Dictionary<EGameState, AGameState>();
