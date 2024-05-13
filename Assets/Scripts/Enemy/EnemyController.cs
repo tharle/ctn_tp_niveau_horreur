@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
@@ -28,14 +27,16 @@ public class EnemyController : MonoBehaviour
     {
         if (m_Attacking)
         {
-            MakeNoise();
 
             Vector3 direction = PlayerController.Instance.transform.position - transform.position;
             direction.Normalize();
             transform.forward = direction;
+            float distance = Vector3.Distance(PlayerController.Instance.transform.position, transform.position);
             float offDistance = Vector3.Distance(PlayerController.Instance.transform.position, transform.position) / m_OffDistance;
+            if (distance < m_OffDistance*2) MakeNoise();
             offDistance += 0.5f;
             m_Rigidbody.velocity = direction * m_Speed * offDistance;
+
 
             m_ElapseTime += Time.deltaTime;
             if(m_ElapseTime >= 15) ToStartPosition(false);
@@ -49,8 +50,8 @@ public class EnemyController : MonoBehaviour
         m_AudioPlaying?.Stop();
         int index = Random.Range(0, m_Sons.Count);
         m_AudioId = m_Sons[index];
-        //m_AudioPlaying = AudioManager.GetInstance().Play(m_AudioId, transform.position, false);
-        m_AudioPlaying = AudioManager.GetInstance().Play(m_AudioId, PlayerController.Instance.transform.position, false);
+        m_AudioPlaying = AudioManager.GetInstance().Play(m_AudioId, transform.position, false);
+        //m_AudioPlaying = AudioManager.GetInstance().Play(m_AudioId, PlayerController.Instance.transform.position, false);
     }
 
 
@@ -59,6 +60,9 @@ public class EnemyController : MonoBehaviour
         m_Rigidbody.velocity = Vector3.zero;
         int index = Random.Range(0, m_Poistions.Count);
         transform.position = m_Poistions[index].position;
+        Vector3 position = transform.position;
+        position.y = 6;
+        transform.position = position;
         m_ElapseTime = 0;
         if (waiting) StartCoroutine(WaitingToAttack());
 
