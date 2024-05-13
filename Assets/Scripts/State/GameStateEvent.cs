@@ -38,5 +38,11 @@ public class GameStateEvent
         if (m_Events.ContainsKey(gameStateId))
             m_Events[gameStateId]?.Invoke(isEnter);
     }
+
+    internal void ClearAll()
+    {
+        m_Events.Clear();
+        m_Events = new();
+    }
 }
 

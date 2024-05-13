@@ -10,6 +10,7 @@ public class GameStateWin : AGameState
 
     public override void Enter()
     {
+        base.Enter();
         Time.timeScale = 0f;
         Cursor.visible = true;
     }

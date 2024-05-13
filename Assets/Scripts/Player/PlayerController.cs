@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     public event Action<float> OnChangeSP;
     public event Action<float> OnChangeLightDuration;
 
+    private float m_HP = 3;
+    private float m_HPMax = 3;
+
     private Dictionary<EKeyType, bool> m_Invetory;
 
     private static PlayerController m_Instance;
@@ -25,7 +28,6 @@ public class PlayerController : MonoBehaviour
         if (m_Instance != null) Destroy(gameObject);
 
         m_Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -47,9 +49,9 @@ public class PlayerController : MonoBehaviour
     {
         OnCloseTextInfo?.Invoke();
     }
-    public void HPNofity(float HPRatio)
+    public void HPNofity()
     {
-        OnChangeHP?.Invoke(HPRatio);
+        OnChangeHP?.Invoke(m_HP/m_HPMax);
     }
     
     public void SPNofity(float SPRatio)
@@ -76,5 +78,16 @@ public class PlayerController : MonoBehaviour
     public bool IsWin()
     {
         return m_Invetory.ContainsKey(EKeyType.Win) && m_Invetory[EKeyType.Win];
+    }
+
+    public void GetHit()
+    {
+        m_HP--;
+        HPNofity();
+    }
+
+    public bool IsDead()
+    {
+        return m_HP <= 0;
     }
 }

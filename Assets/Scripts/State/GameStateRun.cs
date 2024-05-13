@@ -29,6 +29,12 @@ public class GameStateRun : AGameState
             return;
         }
 
+        if (PlayerController.Instance.IsDead())
+        {
+            m_AttachedBehavior.ChangeState(EGameState.Lose);
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             m_AttachedBehavior.ChangeState(EGameState.PauseMenu);
@@ -39,6 +45,13 @@ public class GameStateRun : AGameState
         if (Input.GetKeyDown(KeyCode.E) && InterractManager.Instance.IsCollidigWithPlayer)
         {
             m_AttachedBehavior.ChangeState(EGameState.Interract);
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            PlayerController.Instance.GetHit();
+
             return;
         }
 

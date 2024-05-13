@@ -47,23 +47,24 @@ public class HUDManager : MonoBehaviour
 
     private void OnLose(bool show)
     {
+        Debug.Log("TESTE ENTER NOTIFY LOSE");
         m_LosePanel.SetActive(show);
     }
 
     private void OnWin(bool show)
     {
-        m_WinPanel.SetActive(show);
+        m_WinPanel?.SetActive(show);
     }
 
     private void OnInterractObjectShow(string texte)
     {
         m_TextInfoValue.text = texte;
-        m_TextInfo.SetActive(true);
+        m_TextInfo?.SetActive(true);
     }
 
     private void OnInterractObjectClose()
     {
-        m_TextInfo.SetActive(false);
+        m_TextInfo?.SetActive(false);
     }
 
     private void OnToggleInterractToolTip(bool show)
@@ -88,7 +89,7 @@ public class HUDManager : MonoBehaviour
 
     private void OnPauseMenuToggle(bool show)
     {
-        m_PauseMenuPanel.SetActive(show);
+        m_PauseMenuPanel?.SetActive(show);
     }
 
 
