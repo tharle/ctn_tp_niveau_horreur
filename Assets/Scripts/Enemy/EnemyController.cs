@@ -48,7 +48,14 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
+        if (other.CompareTag(GameParameters.TagName.FLASHLIGHT))
+        {
+            Debug.Log("MONSTER HIT");
+            // TODO: ADD son hit enemy
+            ToStartPosition();
+            return;
+        }
+
         if (other.CompareTag(GameParameters.TagName.PLAYER))
         {
             PlayerController.Instance.GetHit();

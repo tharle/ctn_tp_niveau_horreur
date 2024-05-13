@@ -82,5 +82,6 @@ public class GameParameters
         public const string PLAYER = "Player";
         public const string GROUND = "Ground";
         public const string SPOT = "Spot";
+        public const string FLASHLIGHT = "Flashlight";
     }
 }
