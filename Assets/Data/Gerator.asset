@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f5b5543a1efdae438e4983613867210, type: 3}
-  m_Name: Door
+  m_Name: Gerator
   m_EditorClassIdentifier: 
   Item:
-    Name: Door
-    Description: You need a Key to unlock this.
-    ResultMessage: You unlock the House.
+    Name: Gerator
+    Description: 'You need fuel to charge it. <br>Try Get some gas in the car outise
+      of the house. '
+    ResultMessage: The Gerator is full operator.
     TypeId: 2
-    KeyId: 1
+    KeyId: 3

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f5b5543a1efdae438e4983613867210, type: 3}
-  m_Name: CarKey
+  m_Name: FuelDoor
   m_EditorClassIdentifier: 
   Item:
-    Name: Carkey
-    Description: You got a key A
-    ResultMessage: It's Empty
-    TypeId: 1
+    Name: FuelDoor
+    Description: You need a container for get the fuel.
+    ResultMessage: You fill the fuel container.  <br>I think that's enough.
+    TypeId: 2
     KeyId: 1

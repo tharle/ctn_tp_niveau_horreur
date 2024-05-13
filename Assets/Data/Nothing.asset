@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f5b5543a1efdae438e4983613867210, type: 3}
-  m_Name: RechargeBattery
+  m_Name: Nothing
   m_EditorClassIdentifier: 
   Item:
-    Name: Recharge
-    Description: Your Battery as full recharged
-    ResultMessage: 
-    TypeId: 3
-    KeyId: 0
+    Name: Nothing
+    Description: You don't find anything useful.
+    ResultMessage: You don't find anything useful.
+    TypeId: 0
+    KeyId: 2
