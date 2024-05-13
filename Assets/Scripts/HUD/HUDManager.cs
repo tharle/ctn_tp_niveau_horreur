@@ -10,6 +10,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_TextInfoValue;
     [SerializeField] GameObject m_TextInfo;
     [SerializeField] GameObject m_ToInterractToolTip;
+    [SerializeField] GameObject m_PauseMenuPanel;
 
     [SerializeField] Slider m_HPBar;
     [SerializeField] Slider m_SPBar;
@@ -35,6 +36,8 @@ public class HUDManager : MonoBehaviour
         m_PlayerController.OnChangeHP += OnChangeHP;
         m_PlayerController.OnChangeSP += OnChangeSP;
         m_PlayerController.OnChangeLightDuration += OnChangeLightDuration;
+
+        GameStateEvent.Instance.SubscribeTo(EGameState.PauseMenu, OnPauseMenuToggle);
     }
 
     private void OnInterractObjectShow(string texte)
@@ -68,9 +71,25 @@ public class HUDManager : MonoBehaviour
         m_LightBar.value = ratio;
     }
 
+    private void OnPauseMenuToggle(bool show)
+    {
+        m_PauseMenuPanel.SetActive(show);
+    }
+
 
     public void OnClickBtnInterractObjectClose()
     {
         PlayerController.Instance.CloseTextInfo();
+    }
+
+
+    public void OnPauseMenuClicQuit()
+    {
+        Application.Quit();
+    }
+
+    public void OnPauseMenuClicContinue()
+    {
+        GameStateEvent.Instance.Call(EGameState.PauseMenuContinue, true);
     }
 }

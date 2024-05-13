@@ -7,7 +7,8 @@ public enum EGameState
 {
     PauseMenu,
     Run,
-    Interract
+    Interract,
+    PauseMenuContinue
 }
 public abstract class AGameState
 {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,12 @@ public class GameStatePauseMenu : AGameState
         base.Enter();
         Time.timeScale = 0f;
         Cursor.visible = true;
+        GameStateEvent.Instance.SubscribeTo(EGameState.PauseMenuContinue, OnClickPauseMenuContinue);
+    }
+
+    private void OnClickPauseMenuContinue(bool enter)
+    {
+        m_AttachedBehavior.ChangeState(EGameState.Run);
     }
 
     public override void Execute()
@@ -23,7 +30,7 @@ public class GameStatePauseMenu : AGameState
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            m_AttachedBehavior.ChangeState(EGameState.Run);
+            OnClickPauseMenuContinue(true);
         }
     }
 
@@ -31,5 +38,6 @@ public class GameStatePauseMenu : AGameState
     {
         base.Exit();
         Debug.Log("EXIT PauseMenu");
+        GameStateEvent.Instance.UnsubscribeFrom(EGameState.PauseMenuContinue, OnClickPauseMenuContinue);
     }
 }
