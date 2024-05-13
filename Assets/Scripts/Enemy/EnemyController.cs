@@ -11,6 +11,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private List<Transform> m_Poistions;
     private Rigidbody m_Rigidbody;
 
+    private List<EAudio> m_Sons  = new List<EAudio>{ EAudio.SFXEnemy1, EAudio.SFXEnemy2 , EAudio.SFXEnemy3 , EAudio.SFXEnemy4 , EAudio.SFXEnemy5 };
+    private AudioSource m_AudioPlaying;
+    private EAudio m_AudioId;
+
     private float m_ElapseTime;
 
 
@@ -24,6 +28,8 @@ public class EnemyController : MonoBehaviour
     {
         if (m_Attacking)
         {
+            MakeNoise();
+
             Vector3 direction = PlayerController.Instance.transform.position - transform.position;
             direction.Normalize();
             transform.forward = direction;
@@ -36,9 +42,21 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private void MakeNoise() {
+
+        if (m_AudioPlaying != null && m_AudioPlaying.isPlaying) return;
+
+        m_AudioPlaying?.Stop();
+        int index = Random.Range(0, m_Sons.Count);
+        m_AudioId = m_Sons[index];
+        //m_AudioPlaying = AudioManager.GetInstance().Play(m_AudioId, transform.position, false);
+        m_AudioPlaying = AudioManager.GetInstance().Play(m_AudioId, PlayerController.Instance.transform.position, false);
+    }
+
 
     private void ToStartPosition(bool waiting = true)
     {
+        m_Rigidbody.velocity = Vector3.zero;
         int index = Random.Range(0, m_Poistions.Count);
         transform.position = m_Poistions[index].position;
         m_ElapseTime = 0;
@@ -48,7 +66,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(GameParameters.TagName.FLASHLIGHT))
+        if (other.CompareTag(GameParameters.TagName.FLASHLIGHT) && PlayerController.Instance.IsFlashLightTurnOn())
         {
             Debug.Log("MONSTER HIT");
             // TODO: ADD son hit enemy

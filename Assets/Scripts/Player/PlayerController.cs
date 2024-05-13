@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
     public event Action<float> OnChangeSP;
     public event Action<float> OnChangeLightDuration;
 
-    private float m_HP = 3;
-    private float m_HPMax = 3;
+    private float m_HP = 10;
+    private float m_HPMax = 10;
 
     private Dictionary<EKeyType, bool> m_Invetory;
 
@@ -89,5 +89,10 @@ public class PlayerController : MonoBehaviour
     public bool IsDead()
     {
         return m_HP <= 0;
+    }
+
+    public bool IsFlashLightTurnOn()
+    {
+        return m_FlashLight.IsTurnOn();
     }
 }

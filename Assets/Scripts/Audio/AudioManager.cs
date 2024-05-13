@@ -14,7 +14,12 @@ public enum EAudio
     SFXCoin,
     SFXJump,
     SFXDamaged,
-    VFXVictory
+    VFXVictory,
+    SFXEnemy1,
+    SFXEnemy2,
+    SFXEnemy3,
+    SFXEnemy4,
+    SFXEnemy5,
 }
 public class AudioManager
 {
@@ -37,7 +42,7 @@ public class AudioManager
         m_AudioClips = m_Loader.LoadSFX();
     }
 
-    public void Play(EAudio audioClipId, Vector3 soundPosition, bool isLooping = false, float volume = 1f)
+    public AudioSource Play(EAudio audioClipId, Vector3 soundPosition, bool isLooping = false, float volume = 1f)
     {
         AudioSource audioSource;
         audioSource = m_AudioPool.GetAvailable();
@@ -50,6 +55,8 @@ public class AudioManager
             audioSource.Play();
             audioSource.loop = isLooping;
         }
+
+        return audioSource;
     }
 
 

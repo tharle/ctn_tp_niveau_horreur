@@ -92,4 +92,9 @@ public class PlayerFlashLight : MonoBehaviour
     {
         PlayerController.Instance.LightDurationNofity(m_Duration / m_MaxDuration);
     }
+
+    public bool IsTurnOn()
+    {
+        return m_TurnOnToggled;
+    }
 }

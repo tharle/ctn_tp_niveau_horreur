@@ -20,35 +20,11 @@ public class CreatAssetBundles
             assetBundleDefinitionList.Add(ab);
         }
 
-        // SPRITE STAMP
-        {
-            AssetBundleBuild ab = new();
-            ab.assetBundleName = BundleNames.SPRITE_STAMP;
-            ab.assetNames = RecursiveGetAllAssetsInDirectory(BundlePath.BUNDLE_ASSETS + BundlePath.SPRITES_STAMPS).ToArray();
-            assetBundleDefinitionList.Add(ab);
-        }
-
         // SCRIPT OBJETS
         {
             AssetBundleBuild ab = new();
             ab.assetBundleName = BundleNames.SCRIT_OBJETS;
             ab.assetNames = RecursiveGetAllAssetsInDirectory(BundlePath.BUNDLE_ASSETS + BundlePath.SCRIT_OBJETS).ToArray();
-            assetBundleDefinitionList.Add(ab);
-        }
-
-        // MAIN MENU PREFAB LEVELS
-        {
-            AssetBundleBuild ab = new();
-            ab.assetBundleName = BundleNames.PREFAB_LEVEL;
-            ab.assetNames = RecursiveGetAllAssetsInDirectory(BundlePath.BUNDLE_ASSETS + BundlePath.PREFAB_LEVELS).ToArray();
-            assetBundleDefinitionList.Add(ab);
-        }
-
-        // PREFAB ACHIVEMENTS
-        {
-            AssetBundleBuild ab = new();
-            ab.assetBundleName = BundleNames.PREFAB_ACHIVEMENTS;
-            ab.assetNames = RecursiveGetAllAssetsInDirectory(BundlePath.BUNDLE_ASSETS + BundlePath.PREFAB_ACHIVEMENTS).ToArray();
             assetBundleDefinitionList.Add(ab);
         }
 

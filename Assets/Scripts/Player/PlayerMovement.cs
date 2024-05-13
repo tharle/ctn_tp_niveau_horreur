@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
     private PlayerCamera m_LookAtManager;
+    private AudioSource m_AudioMove;
+    private EAudio m_AudioId;
 
     [SerializeField] private float m_MoveSpeed = 5f;
     [SerializeField] private float m_RunningSpeed = 8f;
@@ -32,23 +34,39 @@ public class PlayerMovement : MonoBehaviour
         float axisH = Input.GetAxis(GameParameters.InputName.AXIS_HORIZONTAL);
         float axisV = Input.GetAxis(GameParameters.InputName.AXIS_VERTICAL);
 
+        Vector3 direction = m_LookAtManager.transform.forward * axisV + m_LookAtManager.transform.right * axisH;
+        direction.y = 0;
+
         float speed = m_MoveSpeed;
         if (IsRuning())
         {
             speed = m_RunningSpeed;
             ConsumeStamina();
+
+            if (direction.magnitude > 0 && (m_AudioId != EAudio.SFXRunDirty || !m_AudioMove.isPlaying) ) 
+            {
+                m_AudioMove?.Stop();
+                m_AudioId = EAudio.SFXRunDirty;
+                m_AudioMove = AudioManager.GetInstance().Play(m_AudioId, transform.position, true);
+            } 
         } else
         {
             RegenStamina();
+            if (direction.magnitude > 0 && (m_AudioId != EAudio.SFXWalkDirty || !m_AudioMove.isPlaying))
+            {
+                m_AudioMove?.Stop();
+                m_AudioId = EAudio.SFXWalkDirty;
+                m_AudioMove = AudioManager.GetInstance().Play(m_AudioId, transform.position, true);
+            }
         }
+
+        if (direction.magnitude == 0) m_AudioMove?.Stop();
 
 
         if (axisH == 0 && axisV == 0) return;
 
         //Vector3 velocity = m_Rigidbody.velocity;
 
-        Vector3 direction = m_LookAtManager.transform.forward * axisV + m_LookAtManager.transform.right * axisH;
-        direction.y = 0;
         //transform.forward = direction;
         Vector3 velocity = direction * speed;
         velocity.y = m_Rigidbody.velocity.y;

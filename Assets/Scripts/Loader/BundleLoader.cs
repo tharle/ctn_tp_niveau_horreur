@@ -78,7 +78,12 @@ public class BundleLoader: MonoBehaviour
             nameof(EAudio.SFXJump),
             nameof(EAudio.SFXCoin),
             nameof(EAudio.SFXDamaged),
-            nameof(EAudio.VFXVictory)
+            nameof(EAudio.VFXVictory),
+            nameof(EAudio.SFXEnemy1),
+            nameof(EAudio.SFXEnemy2),
+            nameof(EAudio.SFXEnemy3),
+            nameof(EAudio.SFXEnemy4),
+            nameof(EAudio.SFXEnemy5),
         };
 
         return assetNames;
@@ -121,6 +126,21 @@ public class BundleLoader: MonoBehaviour
                     break;
                 case nameof(EAudio.VFXVictory):
                     audioId = EAudio.VFXVictory;
+                    break;
+                case nameof(EAudio.SFXEnemy1):
+                    audioId = EAudio.SFXEnemy1;
+                    break;
+                case nameof(EAudio.SFXEnemy2):
+                    audioId = EAudio.SFXEnemy2;
+                    break;
+                case nameof(EAudio.SFXEnemy3):
+                    audioId = EAudio.SFXEnemy3;
+                    break;
+                case nameof(EAudio.SFXEnemy4):
+                    audioId = EAudio.SFXEnemy4;
+                    break;
+                case nameof(EAudio.SFXEnemy5):
+                    audioId = EAudio.SFXEnemy5;
                     break;
 
             }
