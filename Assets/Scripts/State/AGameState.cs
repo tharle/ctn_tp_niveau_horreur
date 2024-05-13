@@ -8,7 +8,9 @@ public enum EGameState
     PauseMenu,
     Run,
     Interract,
-    PauseMenuContinue
+    PauseMenuContinue,
+    Win,
+    Lose
 }
 public abstract class AGameState
 {

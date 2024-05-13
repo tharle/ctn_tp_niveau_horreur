@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
@@ -11,6 +12,8 @@ public class HUDManager : MonoBehaviour
     [SerializeField] GameObject m_TextInfo;
     [SerializeField] GameObject m_ToInterractToolTip;
     [SerializeField] GameObject m_PauseMenuPanel;
+    [SerializeField] GameObject m_WinPanel;
+    [SerializeField] GameObject m_LosePanel;
 
     [SerializeField] Slider m_HPBar;
     [SerializeField] Slider m_SPBar;
@@ -38,6 +41,18 @@ public class HUDManager : MonoBehaviour
         m_PlayerController.OnChangeLightDuration += OnChangeLightDuration;
 
         GameStateEvent.Instance.SubscribeTo(EGameState.PauseMenu, OnPauseMenuToggle);
+        GameStateEvent.Instance.SubscribeTo(EGameState.Win, OnWin);
+        GameStateEvent.Instance.SubscribeTo(EGameState.Lose, OnLose);
+    }
+
+    private void OnLose(bool show)
+    {
+        m_LosePanel.SetActive(show);
+    }
+
+    private void OnWin(bool show)
+    {
+        m_WinPanel.SetActive(show);
     }
 
     private void OnInterractObjectShow(string texte)
@@ -83,9 +98,14 @@ public class HUDManager : MonoBehaviour
     }
 
 
-    public void OnPauseMenuClicQuit()
+    public void OnClicToMainMenu()
     {
-        Application.Quit();
+        SceneManager.LoadScene("Main_Menu");
+    }
+
+    public void OnClicToRestart()
+    {
+        SceneManager.LoadScene("Game_Farm");
     }
 
     public void OnPauseMenuClicContinue()

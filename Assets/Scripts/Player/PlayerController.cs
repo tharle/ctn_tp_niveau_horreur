@@ -72,4 +72,9 @@ public class PlayerController : MonoBehaviour
     {
         return m_Invetory.ContainsKey(keyId);
     }
+
+    public bool IsWin()
+    {
+        return m_Invetory.ContainsKey(EKeyType.Win) && m_Invetory[EKeyType.Win];
+    }
 }

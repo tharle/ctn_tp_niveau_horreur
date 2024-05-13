@@ -22,6 +22,13 @@ public class GameStateRun : AGameState
     public override void Execute()
     {
         base.Execute();
+
+        if (PlayerController.Instance.IsWin())
+        {
+            m_AttachedBehavior.ChangeState(EGameState.Win);
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             m_AttachedBehavior.ChangeState(EGameState.PauseMenu);

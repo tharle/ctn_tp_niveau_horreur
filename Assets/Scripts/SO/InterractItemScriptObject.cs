@@ -17,7 +17,8 @@ public enum EKeyType
     None,
     Fuel,
     B,
-    Gerator
+    Gerator,
+    Win
 }
 
 [Serializable]

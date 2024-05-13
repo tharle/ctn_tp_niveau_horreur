@@ -81,6 +81,7 @@ public class InterractManager : MonoBehaviour
         }
         else
         {
+            if (m_InterractItemController.KeyId == EKeyType.Gerator) PlayerController.Instance.AddKeyToInvetory(EKeyType.Win);
             OnInterractObjectClose?.Invoke();
         }
     }
