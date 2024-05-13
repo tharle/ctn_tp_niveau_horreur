@@ -17,6 +17,7 @@ public class GameStateManager : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
         m_States = new Dictionary<EGameState, AGameState>();
         m_States.Add(EGameState.PauseMenu, new GameStatePauseMenu(this));
         m_States.Add(EGameState.Run, new GameStateRun(this));

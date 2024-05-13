@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private List<Transform> m_Poistions;
     private Rigidbody m_Rigidbody;
 
-    private List<EAudio> m_Sons  = new List<EAudio>{ EAudio.SFXEnemy1, EAudio.SFXEnemy2 , EAudio.SFXEnemy3 , EAudio.SFXEnemy4 , EAudio.SFXEnemy5 };
+    private List<EAudio> m_Sons  = new List<EAudio>{ EAudio.SFXEnemy5 };
     private AudioSource m_AudioPlaying;
     private EAudio m_AudioId;
 
